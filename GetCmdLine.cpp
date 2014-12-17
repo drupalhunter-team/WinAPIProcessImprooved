@@ -137,6 +137,6 @@ PWSTR GetCMDLine(DWORD pid, Logging::AbstractLogger *_log)
 			throw MsgException("FAIL");
 		}
 	}
-	printf("%S\n", cmdLine);
+	//printf("%S\n", cmdLine);
 	return cmdLine;
 }
