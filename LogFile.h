@@ -35,6 +35,8 @@ namespace Logging{
 		virtual void LogMessage(Level level, Formatter& format, std::string message)=0;
 		void SetLevel(Level level);
 		Level GetLevel();
+		void SetName(std::string& name);
+		std::string GetName();
 		bool CanLog(Level level);
 		static std::string ConvertLevelToString(Level level);
 		static int CompareLevels(Level l1, Level l2);

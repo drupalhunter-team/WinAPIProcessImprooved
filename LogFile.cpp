@@ -25,6 +25,14 @@ Logging::Level Logging::AbstractLogger::GetLevel(){
 	std::lock_guard<std::mutex>locker(_mu);
 	return _level;
 }
+void Logging::AbstractLogger::SetName(std::string& name){
+	std::lock_guard<std::mutex>locker(_mu);
+	_name = name;
+}
+std::string Logging::AbstractLogger::GetName(){
+	std::lock_guard<std::mutex>locker(_mu);
+	return _name;
+}
 bool Logging::AbstractLogger::CanLog(Level level){
 	return CompareLevels(level, _level) >= 0;
 }
