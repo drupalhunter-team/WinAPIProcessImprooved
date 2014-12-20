@@ -46,6 +46,8 @@ ProcessManager::ProcessManager(DWORD pid)
 		std::string error = "Failed to open process with error ";
 		error.append(std::to_string(GetLastError()));
 		_log->LogMessage(Logging::Sever,format,error);
+		delete _log;
+		throw MsgException(error);
 	}
 	PWSTR cmdline = GetCMDLine(pid, _log);
 	_cmdline.append(cmdline);
@@ -72,10 +74,13 @@ ProcessManager::ProcessManager(DWORD pid,
 	_OnProcManuallyStopped = [] { return; };
 	ZeroMemory(&_pi, sizeof(_pi));
 	HANDLE handle = OpenProcess(PROCESS_ALL_ACCESS, FALSE, pid);
+
 	if (handle == NULL){
 		std::string error = "Failed to open process with error ";
 		error.append(std::to_string(GetLastError()));
 		_log->LogMessage(Logging::Sever,format,error);
+		delete _log;
+		throw MsgException(error);
 	}
 	PWSTR cmdline = GetCMDLine(pid, _log);
 	_cmdline.append(cmdline);
